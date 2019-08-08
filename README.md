@@ -1,6 +1,6 @@
-# Post-mortem log file analysis with Docker ELK stack
+# Post-mortem access log file analysis with Docker ELK stack
 
-The aim of this project is to use the ELK stack to do provide you tooling for analysing the log files in an offline-manner. 
+The aim of this project is to use the ELK stack to do provide you tooling for analysing the **access logs** in an offline-manner. 
 
 ## Use-case
 
@@ -11,28 +11,7 @@ After a crash you have been sent MBs of log files from a customer. At the custom
 LogStash parses the logfiles using a Grok filter and sends the entries to the ElasticSearch instance.
 Thus you can create queries, visualisations and dashboards in Kibana to visualise the log file content. 
 
-``` puml
-hide footbox
-Actor You 
-Participant LogStash
-Participant ElasticSearch
-Participant Kibana
-
-
-==Parsing==
-LogStash -> LogStash : reads the log files
-LogStash -> LogStash : parses the log files using 'Grok'
-LogStash -> ElasticSearch : persists parsed logs
-
-==Analysing==
-You -> Kibana : work with 
-Kibana -> ElasticSearch : reads entries
-Kibana <- ElasticSearch : 
-Kibana -> You : provides visualisations/dashboards
-
-```
-
-
+![Sequence](sequencediagram.png)
 ## Quickstart
 
 1. Checkout the project
@@ -42,19 +21,11 @@ Kibana -> You : provides visualisations/dashboards
 5. Invoke `docker-compose up -d` to start the Docker containers
 6. Open Kibana at `http://localhost:5601`
 7. Create a Kibana index manually at `Management/Index Patterns/`
-8. Analyse your data 
+8. Analyse your data (Update the timefilter to see data)
 
 
 ## TODOs
-* support multline-stacktraces in the logfiles
-  * https://discuss.elastic.co/t/using-logstash-to-analyse-log4j-log-files/44914
-  * https://blog.lanyonm.org/articles/2015/12/29/log-aggregation-log4j-spring-logstash.html
-  * https://stackoverflow.com/questions/37931563/what-should-be-the-logstash-grok-filter-for-this-log4j-log
-  * https://sematext.com/blog/handling-stack-traces-with-logstash/
-  * https://stackoverflow.com/questions/19856316/logstash-multiline-filter-configuration-and-java-exceptions
-
 * create the Kibana-index automatically - [see](#via-the-kibana-web-ui)
-* support multiple patterns using [Logstash-multiple pipelines](https://www.elastic.co/blog/logstash-multiple-pipelines) and [type filters](https://sematext.com/blog/getting-started-with-logstash/)
 * provide some default filters and visualisations for Kibana
 * allow to persist user-created filters/visualisations
 
