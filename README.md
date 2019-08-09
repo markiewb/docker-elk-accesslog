@@ -19,9 +19,9 @@ Thus you can create queries, visualisations and dashboards in Kibana to visualis
 3. Fine tune the  grok-pattern in  `./logstash/pipeline/logstash.conf` (an example for the example-log is provided)
 4. Invoke `docker-compose build`
 5. Invoke `docker-compose up -d` to start the Docker containers
-6. Open Kibana at `http://localhost:5601`
+6. Open Kibana at `http://localhost:5601` (elastic:changeme)
 7. Create a Kibana index manually at `Management/Index Patterns/`
-8. Analyse your data (Update the timefilter to see data)
+8. Analyse your data (Update the timefilter to see data! 2005 to NOW for the sample data)
 
 
 ## TODOs
@@ -46,7 +46,7 @@ Thus you can create queries, visualisations and dashboards in Kibana to visualis
 
 ## Trademark
 
-This setup of ELK 6.2.3 is based on https://github.com/deviantony/docker-elk/
+This setup of ELK 7.2.1 OSS (disabled paid features) is based on https://github.com/deviantony/docker-elk/
 
 
 # Docker ELK stack
